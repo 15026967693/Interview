@@ -1,0 +1,73 @@
+extends ./mixin
+doctype html
+html
+  head
+    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+  body
+   include mixin
+   + navbar([
+																		{
+																			href:"./myself.html",
+																			text:"个人简介"
+																		
+																		},
+																		{
+																			href:"https://pan.baidu.com/s/1vitUBBDVE2pS6RIAYaZ_9Q",
+																			text:"网页源码下载"
+																		
+																		},
+																		{
+																			href:"./declare.html",
+																			text:"网页声明"
+																		
+																		},
+																		{
+																			href:"javascript:;",
+																			text:"我的技术",
+																			dropdownmenuItems:
+																								[
+																									{
+																										href:"allTechShow.html",
+																										text:"总览"
+																									},
+																									{
+																										href:"./nodejs.html",
+																										text:"nodejs",
+																									},
+																									{
+																										href:"divider"
+																									},
+																									{
+																										href:"./java.html",
+																										text:"java"
+																									},
+																										{
+																										href:"./groovy.html",
+																										text:"groovy",
+																									},
+																									{
+																										href:"./scala.html",
+																										text:"scala",
+																									},
+																									{
+																										href:'divider'
+																									},
+																									{
+																										href:"./mysql.html",
+																										text:"mysql数据库"
+																									},
+																									{
+																										href:'divider'
+																									},
+																									{
+																										href:"./project.html",
+																										text:"小项目"
+																									}
+																								]
+																		},
+																		{
+																			href:"index.html",
+																			text:"返回"
+																		}
+																	])
+   block content

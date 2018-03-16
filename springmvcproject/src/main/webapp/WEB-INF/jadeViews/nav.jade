@@ -1,0 +1,13 @@
+doctype html
+include ./basePath.jade
+html
+  head
+    meta(http-equiv="Content-Type" content="text/html;charset=UTF-8")
+    link(rel="stylesheet",href=basePath+"/js/lib/bootstrap/bootstrap-theme/css/bootstrap-theme.min.css",type="text/css")
+    link(rel="stylesheet",href=basePath+"/js/lib/bootstrap/bootstrap-theme/css/bootstrap.min.css",type="text/css")
+    script(src=basePath+"/js/lib/requirejs/require.js",data-main=basePath+"/js/main.js")
+    include ./mixin.jade
+  body
+    - var s={"header":{"href":"#",text:"menuheader"},"items":[{"text":"hii","href":"#"},{"text":"hii","href":"#","dropdownmenuItems":[{"text":"dropdown","href":"#"}]}]}
+    +navbar(s)
+   

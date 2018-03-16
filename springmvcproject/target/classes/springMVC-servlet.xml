@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+   <!-- 拦截器 -->
+   <mvc:interceptors>
+   <mvc:interceptor>
+   <mvc:mapping path="/*.html"/>
+   <bean class="com.jiayang.interceptor.TestInterceptor"></bean>
+   </mvc:interceptor>
+   </mvc:interceptors>
+   
+     <!--  
+    <mvc:annotation-driven conversion-service="conversionService"/>
+       
+    
+    <mvc:interceptors >  
+  <mvc:interceptor>  
+        <mvc:mapping path="/stu*.action" />
+        <mvc:exclude-mapping path="/studentloginindex.action"/>
+         <mvc:exclude-mapping path="/studentlogin.action"/>
+          <mvc:exclude-mapping path="/studentregister.action"/>
+          <mvc:exclude-mapping path="/studentregisterservice.action"/>
+        <bean class="com.icss.interceptors.StudentInterceptor"></bean>  
+    </mvc:interceptor>  
+       
+
+    
+    <mvc:interceptor>
+    <mvc:mapping path="/tea*.action" />
+    <mvc:exclude-mapping path="/teacherloginindex.action"/>
+    <mvc:exclude-mapping path="/teacherlogin.action"/>
+     <mvc:exclude-mapping path="/teacherregister.action"/>
+     <mvc:exclude-mapping path="/teacherregister.action"/>
+          <mvc:exclude-mapping path="/teacherregisterservice.action"/>
+        <bean class="com.icss.interceptors.TeacherInterceptor">
+        
+    </bean>  
+    </mvc:interceptor>  
+
+<mvc:interceptor>
+
+  <mvc:mapping path="/admin*/*.action" />
+        <bean class="com.icss.interceptors.AdminInterceptor"></bean> 
+
+</mvc:interceptor>
+</mvc:interceptors>
+-->
+<mvc:annotation-driven/>
+    <context:component-scan base-package="com.jiayang.controller">
+    <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
+    <bean id="spring-template-loader" class="de.neuland.jade4j.spring.template.SpringTemplateLoader">
+        <property name="basePath" value="/WEB-INF/jadeViews/"></property>
+        <property name="suffix" value=".jade"></property>
+        <property name="encoding" value="UTF-8"></property>
+    </bean>
+    <bean id="jade-configuration" class="de.neuland.jade4j.JadeConfiguration">
+        <property name="prettyPrint" value="true"></property>
+        <property name="templateLoader" ref="spring-template-loader"></property>
+        <property name="caching" value="false"></property>
+    </bean>
+    <bean class="de.neuland.jade4j.spring.view.JadeViewResolver">
+        <property name="configuration" ref="jade-configuration"></property>
+        <property name="renderExceptions" value="true"></property>
+<!--  <property name="viewNames" value="jade*"/>-->
+         <property name="order" value="1" />
+    </bean>
+
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <property name="prefix" value="/WEB-INF/jspViews/"></property>
+     <property name="suffix" value=".jsp"></property>
+      <property name="order" value="2" />
+      <!--<property name="viewNames" value="jsp*"/>--> 
+     </bean>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+       <property name="defaultEncoding" value="UTF-8"></property>
+		<property name="maxUploadSize" value="104857600"></property>
+		<property name="maxInMemorySize" value="4096"></property>
+    </bean>
+    <!-- 类型转换器的注册 -->
+
+	<bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+	<property name="converters">
+	<set>
+	   <bean class="com.jiayang.converter.StringToDateConvert">
+	       <constructor-arg value="yyyy-MM-dd"></constructor-arg>
+	   </bean>
+	</set>
+	</property>
+	</bean>
+	 
+</beans>
